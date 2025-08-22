@@ -196,7 +196,7 @@ function removeRandomRectangles(count) {
 
 // Функция для получения случайного количества квадратов для удаления
 function getRandomIndex() {
-  return Math.floor(Math.random() * 2) + 3 // Вернёт либо 3, либо 4
+  return Math.floor(Math.random() * 2) + 8 // Вернёт либо 3, либо 4
 }
 
 // Функция для обработки сценариев удаления (экспортируем в глобальную область)

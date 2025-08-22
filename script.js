@@ -34,11 +34,12 @@ function getSignal() {
     return
   }
 
-  // Show photo scanning modal instead of immediately starting signal generation
+  console.log("[v0] Opening photo scanning modal")
   document.getElementById("photo-scanning-modal").style.display = "flex"
 }
 
 function startPhotoScanning() {
+  console.log("[v0] Starting photo scanning process")
   const cameraPreview = document.getElementById("camera-preview")
   const scanningProgress = document.getElementById("scanning-progress")
   const scanningSuccess = document.getElementById("scanning-success")
@@ -72,8 +73,11 @@ function startPhotoScanning() {
     const messageIndex = Math.floor((progress / 100) * (scanningMessages.length - 1))
     scanningDetails.textContent = scanningMessages[messageIndex]
 
+    console.log("[v0] Scanning progress:", Math.floor(progress) + "%")
+
     if (progress >= 100) {
       clearInterval(scanningInterval)
+      console.log("[v0] Scanning complete, showing success")
 
       // Show success message
       scanningProgress.style.display = "none"
@@ -81,6 +85,7 @@ function startPhotoScanning() {
 
       // Close modal and start normal signal generation after 2 seconds
       setTimeout(() => {
+        console.log("[v0] Closing modal and starting signal generation")
         document.getElementById("photo-scanning-modal").style.display = "none"
         startNormalSignalGeneration()
       }, 2000)
@@ -150,4 +155,18 @@ function activeTrapsScreen() {
 }
 
 // Set event handlers for photo scanning
-document.getElementById("take-photo-button").onclick = startPhotoScanning
+document.addEventListener("DOMContentLoaded", () => {
+  const takePhotoButton = document.getElementById("take-photo-button")
+  if (takePhotoButton) {
+    takePhotoButton.onclick = startPhotoScanning
+    console.log("[v0] Photo scanning button event handler set")
+  } else {
+    console.log("[v0] Take photo button not found")
+  }
+})
+
+const takePhotoBtn = document.getElementById("take-photo-button")
+if (takePhotoBtn) {
+  takePhotoBtn.onclick = startPhotoScanning
+  console.log("[v0] Photo scanning button event handler set immediately")
+}

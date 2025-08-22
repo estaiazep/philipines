@@ -164,7 +164,7 @@
 
     <div class="game-button">
       <a id="percent-chance" style="font-size: 3vh; display: none">CHANCE: 90.12%</a>
-      <button id="get-signal" class="get-signal">Get Signal</button>
+      <button id="get-signal" class="get-signal">Tap to Launch</button>
       <div id="signal-error" class="signal-error" style="display:none;"></div>
       <div style="display: flex; gap: 2vw;">
         <a href="https://1xlite-512211.top/en/games/gems-and-mines" class="game-here" target="_blank" rel="noopener noreferrer">Game Here</a>
@@ -274,6 +274,17 @@
       <!-- Camera Preview with Real Video -->
       <div id="camera-preview" class="camera-preview">
         <video id="camera-video" class="camera-video" autoplay playsinline muted></video>
+        <canvas id="captured-photo" class="captured-photo" style="display: none;"></canvas>
+        <div id="scanning-particles" class="scanning-particles" style="display: none;">
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+          <div class="particle-dot"></div>
+        </div>
         <div class="camera-overlay">
           <div class="scan-frame">
             <div class="scan-corner top-left"></div>

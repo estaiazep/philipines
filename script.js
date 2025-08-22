@@ -85,24 +85,28 @@ function startPhotoScanning() {
   const scanningText = document.getElementById("scanning-text")
   const scanningDetails = document.getElementById("scanning-details")
   const videoElement = document.getElementById("camera-video")
+  const capturedPhoto = document.getElementById("captured-photo")
+  const scanningParticles = document.getElementById("scanning-particles")
 
   if (videoElement && cameraStream) {
     // Create canvas to capture photo
-    const canvas = document.createElement("canvas")
+    const canvas = capturedPhoto
     const context = canvas.getContext("2d")
-    canvas.width = videoElement.videoWidth
-    canvas.height = videoElement.videoHeight
+    canvas.width = videoElement.videoWidth || 400
+    canvas.height = videoElement.videoHeight || 300
 
     // Draw current video frame to canvas (this captures the photo)
-    context.drawImage(videoElement, 0, 0)
+    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)
 
     console.log("[v0] Photo captured from camera")
+
+    videoElement.style.display = "none"
+    capturedPhoto.style.display = "block"
+    scanningParticles.style.display = "block"
   }
 
   stopCamera()
 
-  // Hide camera preview and button, show scanning progress
-  cameraPreview.style.display = "none"
   takePhotoButton.style.display = "none"
   scanningProgress.style.display = "block"
 
@@ -153,12 +157,17 @@ function resetPhotoModal() {
   const scanningProgress = document.getElementById("scanning-progress")
   const scanningSuccess = document.getElementById("scanning-success")
   const takePhotoButton = document.getElementById("take-photo-button")
+  const videoElement = document.getElementById("camera-video")
+  const capturedPhoto = document.getElementById("captured-photo")
+  const scanningParticles = document.getElementById("scanning-particles")
 
-  // Reset modal to initial state
   cameraPreview.style.display = "block"
   takePhotoButton.style.display = "block"
   scanningProgress.style.display = "none"
   scanningSuccess.style.display = "none"
+  videoElement.style.display = "block"
+  capturedPhoto.style.display = "none"
+  scanningParticles.style.display = "none"
 }
 
 function startNormalSignalGeneration() {

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>MINES</title>
+  <style type="text/css" id="operaUserStyle"></style>
+</head>
+
+<body>
+
+<!-- Welcome Screen -->
+<div id="welcome-screen" class="welcome-container">
+  <div class="welcome-background">
+    <div class="floating-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    
+    <div class="welcome-content">
+      <div class="welcome-logo">
+        <div class="logo-icon">🎯</div>
+        <h1 class="welcome-title">SANTOS SIGNAL</h1>
+        <div class="welcome-subtitle">Premium Mining Bot</div>
+      </div>
+      
+      <div class="welcome-features">
+        <div class="feature-item">
+          <div class="feature-icon">🇵🇭</div>
+          <span>Made exclusively for Philippines</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <span>Real-time signal generation</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💎</div>
+          <span>95%+ accuracy rate</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🚀</div>
+          <span>Instant profit alerts</span>
+        </div>
+      </div>
+      
+      <div class="welcome-stats">
+        <div class="stat-item">
+          <div class="stat-number">15,847</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">₱2.4M</div>
+          <div class="stat-label">Total Earnings</div>
+        </div>
+      </div>
+      
+      <button id="start-bot-button" class="start-bot-btn">
+        <span class="btn-text">Start Using Bot</span>
+        <div class="btn-glow"></div>
+      </button>
+      
+      <div class="welcome-footer">
+        <p>🔒 Secure • 🎯 Accurate • 💰 Profitable</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Game Screen -->
+<div id="main-game" style="display: none;">
+  <a href="javascript:void(0)" class="BackArrow">
+    <svg id="backArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="60" height="60">
+      <defs>
+        <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00ffe1">
+            <animate attributeName="offset" values="0;1;0" dur="2s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stop-color="#ffffff">
+            <animate attributeName="offset" values="1;0;1" dur="2s" repeatCount="indefinite" />
+          </stop>
+        </linearGradient>
+      </defs>
+      <path d="M 30 10 L 15 25 L 30 40" fill="none" stroke="url(#arrow-gradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <div class="item-traps select-index-box">
+    <img src="bomb.png" alt="">
+    <a id="select-index">3</a>
+  </div>
+
+  <div class="header">
+    <img class="img-footer" src="footer.webp" alt="footer">
+  </div>
+
+  <div class="game-container">
+    <div class="crack crack1" style="left: 42vw; top: 2vh; rotate: 95deg; scale: 1.5;">
+      <img src="crack1.svg" alt="crack">
+    </div>
+    <div class="crack crack2" style="left: 0vw; top: 34vh; rotate: 360deg;">
+      <img src="crack1.svg" alt="crack">
+    </div>
+    <div class="crack crack3" style="left: 81vw; rotate: 227deg;">
+      <img src="crack1.svg" alt="crack">
+    </div>
+    <div class="crack particles1" style="top: 21vh; left: 2vw; scale: 1.5;">
+      <img src="particles.svg" alt="crack">
+    </div>
+    <div class="crack particles2" style="top: 39vh; left: 82vw; rotate: 288deg;">
+      <img src="particles.svg" alt="crack">
+    </div>
+
+    <div class="text-top">
+      <h1 class="text-title">MINES</h1>
+      <p class="name-bot">BOT MADE ONLY FOR 1XBET</p>
+    </div>
+
+    <div style="justify-content: center; display: flex; vertical-align: middle;">
+      <div class="game-screen">
+        <div class="screen-active" id="main-screen">
+          <img draggable="false" id="screenStart" class="screenStart" src="Mines.png" alt="start">
+          <img draggable="false" src="loading.gif" alt="loading" id="loading" class="loading deactive">
+          <canvas class="img-signal deactive" id="canvas"></canvas>
+        </div>
+
+        <div class="screen-active" id="traps-screen" style="display: none">
+          <div class="traps-screen">
+            <div class="item-traps" onclick="handleClick(this)">
+              <img src="bomb.png">
+              <a>1</a>
+            </div>
+            <div class="item-traps" onclick="handleClick(this)">
+              <img src="bomb.png">
+              <a>3</a>
+            </div>
+            <div class="item-traps" onclick="handleClick(this)">
+              <img src="bomb.png">
+              <a>5</a>
+            </div>
+            <div class="item-traps" onclick="handleClick(this)">
+              <img src="bomb.png">
+              <a>7</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="crack crack4" style="rotate: 40deg;">
+      <img src="crack1.svg" alt="crack">
+    </div>
+    <div class="crack" style="left: 76vw; bottom: 30vh; rotate: 327deg; scale: 1.5;">
+      <img src="particles.svg" alt="crack">
+    </div>
+
+    <div class="game-button">
+      <a id="percent-chance" style="font-size: 3vh; display: none">CHANCE: 90.12%</a>
+      <button id="get-signal" class="get-signal">Get Signal</button>
+      <div id="signal-error" class="signal-error" style="display:none;"></div>
+      <div style="display: flex; gap: 2vw;">
+        <a href="https://1xlite-512211.top/en/games/gems-and-mines" class="game-here" target="_blank" rel="noopener noreferrer">Game Here</a>
+        <a onclick="activeTrapsScreen()" id="chose-traps" class="chose-traps">Choose Traps</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <img class="img-footer" src="footer.webp" alt="footer">
+  </div>
+</div>
+
+<!-- Verification Modal -->
+<div id="verification-modal" class="modal-overlay" style="display: none;">
+  <div class="modal-content verification-modal">
+    <div class="verification-header">
+      <div class="verification-icon">🔐</div>
+      <h2 class="verification-title-modal">VERIFY ACCOUNT</h2>
+      <p class="verification-subtitle-modal">Enter your 1xBet account ID</p>
+    </div>
+    
+    <div class="verification-body">
+      <div class="input-container">
+        <input type="text" id="modal-account-id" class="modal-account-input" placeholder="Enter account ID" maxlength="10">
+      </div>
+      <div id="modal-error-message" class="modal-error-message" style="display: none;">Invalid account ID format</div>
+      
+      <!-- Progress Bar -->
+      <div id="verification-progress" class="verification-progress" style="display: none;">
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Checking... 0%</div>
+      </div>
+      
+      <!-- Success Message -->
+      <div id="success-message" class="success-message" style="display: none;">
+        <div class="success-icon">✅</div>
+        <div class="success-text">Account connected to bot!</div>
+      </div>
+    </div>
+    
+    <div class="verification-footer">
+      <button id="modal-verify-button" class="modal-verify-btn">
+        <span>Verify</span>
+      </button>
+      
+      <div class="get-id-section-modal">
+        <p class="get-id-instruction-modal">Need ID? Get it here</p>
+        <button id="modal-get-id-button" class="modal-get-id-btn">Get ID</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Deposit Modal -->
+<div id="deposit-modal" class="modal-overlay" style="display: none;">
+  <div class="modal-content deposit-modal">
+    <div class="deposit-header">
+      <div class="deposit-icon">💰</div>
+      <h2 class="deposit-title">ACTIVATE SIGNALS</h2>
+    </div>
+    
+    <div class="deposit-body">
+      <div class="deposit-message">
+        <p class="deposit-text">✅ ID confirmed.</p>
+        <p class="deposit-text">To activate signals, make a <span class="highlight">₱200</span> deposit.</p>
+        <p class="deposit-text">Bot connects only to active accounts.</p>
+      </div>
+      
+      <div class="unlock-section">
+        <p class="unlock-label">Enter unlock code to activate:</p>
+        <div class="unlock-input-container">
+          <input type="text" id="unlock-code-input" class="unlock-code-input" placeholder="Enter code" maxlength="4">
+        </div>
+        <div id="unlock-error" class="unlock-error" style="display: none;">Wrong unlock code</div>
+        <div id="unlock-success" class="unlock-success" style="display: none;">✅ Bot unlocked successfully!</div>
+      </div>
+      
+      <div class="deposit-info">
+        <p class="deposit-instruction">💬 DM me for your promo code and deposit guide:</p>
+      </div>
+    </div>
+    
+    <div class="deposit-footer">
+      <button id="unlock-bot-button" class="unlock-bot-btn">
+        🔓 Unlock Bot
+      </button>
+      <button id="activate-now-button" class="activate-now-btn">
+        💬 Activate Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Photo Scanning Modal -->
+<div id="photo-scanning-modal" class="modal-overlay" style="display: none;">
+  <div class="modal-content photo-scanning-modal">
+    <div class="scanning-header">
+      <div class="scanning-icon">📸</div>
+      <h2 class="scanning-title">SCAN GAME FIELD</h2>
+      <p class="scanning-subtitle">Take a photo of your game screen</p>
+    </div>
+    
+    <div class="scanning-body">
+      <!-- Camera Preview Simulation -->
+      <div id="camera-preview" class="camera-preview">
+        <div class="camera-overlay">
+          <div class="scan-frame">
+            <div class="scan-corner top-left"></div>
+            <div class="scan-corner top-right"></div>
+            <div class="scan-corner bottom-left"></div>
+            <div class="scan-corner bottom-right"></div>
+          </div>
+          <div class="scan-instruction">Position game field within frame</div>
+        </div>
+        <div class="camera-bg"></div>
+      </div>
+      
+      <!-- Scanning Progress -->
+      <div id="scanning-progress" class="scanning-progress" style="display: none;">
+        <div class="scanning-animation">
+          <div class="scan-line"></div>
+        </div>
+        <div class="scanning-text" id="scanning-text">Analyzing game field... 0%</div>
+        <div class="scanning-details" id="scanning-details">Initializing scanner...</div>
+      </div>
+      
+      <!-- Success Message -->
+      <div id="scanning-success" class="scanning-success" style="display: none;">
+        <div class="success-icon">✅</div>
+        <div class="success-text">Game field scanned successfully!</div>
+        <div class="success-details">Signal generation in progress...</div>
+      </div>
+    </div>
+    
+    <div class="scanning-footer">
+      <button id="take-photo-button" class="take-photo-btn">
+        <span>📸 Take Photo</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="CanvasMines.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script>
+  Telegram.WebApp.expand();
+  window.Telegram.WebApp.allow_vertical_swipe = false;
+  window.Telegram.WebApp.disableVerticalSwipes();
+</script>
+
+<script>
+// Welcome Screen Logic
+function startBot() {
+  document.getElementById("welcome-screen").style.display = "none";
+  document.getElementById("main-game").style.display = "block";
+  
+  // Always show verification modal after 1 second for new users
+  setTimeout(() => {
+    const accountVerified = localStorage.getItem('account_verified');
+    const botUnlocked = localStorage.getItem('bot_unlocked');
+    
+    if (accountVerified !== 'true' || botUnlocked !== 'true') {
+      document.getElementById("verification-modal").style.display = "flex";
+    }
+  }, 1000);
+}
+
+// ID Verification Logic with Progress Bar
+function validateAccountId(id) {
+  return /^13\d{8}$/.test(id);
+}
+
+function showModalError(message) {
+  const errorElement = document.getElementById("modal-error-message");
+  errorElement.textContent = message;
+  errorElement.style.display = "block";
+}
+
+function hideModalError() {
+  document.getElementById("modal-error-message").style.display = "none";
+}
+
+function showProgress() {
+  document.getElementById("verification-progress").style.display = "block";
+  document.getElementById("modal-verify-button").style.display = "none";
+  
+  let progress = 0;
+  const progressBar = document.getElementById("progress-bar-fill");
+  const progressText = document.getElementById("progress-text");
+  
+  const interval = setInterval(() => {
+    progress += 2;
+    progressBar.style.width = progress + "%";
+    progressText.textContent = `Checking... ${progress}%`;
+    
+    if (progress >= 100) {
+      clearInterval(interval);
+      showSuccess();
+    }
+  }, 60); // 3 seconds total
+}
+
+function showSuccess() {
+  document.getElementById("verification-progress").style.display = "none";
+  document.getElementById("success-message").style.display = "block";
+  
+  // Show deposit modal after 2 seconds
+  setTimeout(() => {
+    document.getElementById("verification-modal").style.display = "none";
+    document.getElementById("deposit-modal").style.display = "flex";
+  }, 2000);
+}
+
+function verifyModalAccount() {
+  const accountId = document.getElementById("modal-account-id").value;
+
+  hideModalError();
+
+  if (!validateAccountId(accountId)) {
+    showModalError("Invalid account ID format");
+    return;
+  }
+
+  // Start progress bar
+  showProgress();
+  
+  // Save verification status
+  localStorage.setItem('account_verified', 'true');
+  localStorage.setItem('account_id', accountId);
+}
+
+// Unlock Bot Logic
+function unlockBot() {
+  const unlockCode = document.getElementById("unlock-code-input").value;
+  const errorElement = document.getElementById("unlock-error");
+  const successElement = document.getElementById("unlock-success");
+  
+  // Hide previous messages
+  errorElement.style.display = "none";
+  successElement.style.display = "none";
+  
+  if (unlockCode === "6923") {
+    successElement.style.display = "block";
+    localStorage.setItem('bot_unlocked', 'true');
+    
+    // Close modal after 2 seconds
+    setTimeout(() => {
+      document.getElementById("deposit-modal").style.display = "none";
+    }, 2000);
+  } else {
+    errorElement.style.display = "block";
+  }
+}
+
+// Function to open developer chat for activation
+function openDeveloperChatForActivation() {
+  const developerUsername = "TsantosI_PH_bot";
+  const prefillMessage = "Hi! I want to activate my account for signals 💰";
+  const telegramUrl = `https://t.me/${developerUsername}?text=${encodeURIComponent(prefillMessage)}`;
+  
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.openTelegramLink(telegramUrl);
+  } else {
+    window.open(telegramUrl, '_blank');
+  }
+}
+
+// Function to open developer chat for ID
+function openDeveloperChatForId() {
+  const developerUsername = "TsantosI_PH_bot";
+  const prefillMessage = "Hi! I want to get my 1xBet ID ✅";
+  const telegramUrl = `https://t.me/${developerUsername}?text=${encodeURIComponent(prefillMessage)}`;
+  
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.openTelegramLink(telegramUrl);
+  } else {
+    window.open(telegramUrl, '_blank');
+  }
+}
+
+// Function to handle photo scanning
+function takePhoto() {
+  // Placeholder function for photo scanning logic
+  document.getElementById("photo-scanning-modal").style.display = "none";
+  document.getElementById("scanning-progress").style.display = "block";
+  
+  let progress = 0;
+  const scanningText = document.getElementById("scanning-text");
+  const scanningDetails = document.getElementById("scanning-details");
+  
+  const interval = setInterval(() => {
+    progress += 2;
+    scanningText.textContent = `Analyzing game field... ${progress}%`;
+    
+    if (progress >= 100) {
+      clearInterval(interval);
+      showScanningSuccess();
+    }
+  }, 60); // 3 seconds total
+}
+
+function showScanningSuccess() {
+  document.getElementById("scanning-progress").style.display = "none";
+  document.getElementById("scanning-success").style.display = "block";
+}
+
+// Set event handlers
+document.getElementById("start-bot-button").onclick = startBot;
+document.getElementById("modal-verify-button").onclick = verifyModalAccount;
+document.getElementById("modal-get-id-button").onclick = openDeveloperChatForId;
+document.getElementById("unlock-bot-button").onclick = unlockBot;
+document.getElementById("activate-now-button").onclick = openDeveloperChatForActivation;
+document.getElementById("take-photo-button").onclick = takePhoto;
+
+// Enter key handlers
+document.getElementById("modal-account-id").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    verifyModalAccount();
+  }
+});
+
+document.getElementById("unlock-code-input").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    unlockBot();
+  }
+});
+
+// Clear error on input
+document.getElementById("modal-account-id").addEventListener("input", function() {
+  hideModalError();
+});
+
+document.getElementById("unlock-code-input").addEventListener("input", function() {
+  document.getElementById("unlock-error").style.display = "none";
+  document.getElementById("unlock-success").style.display = "none";
+});
+
+// Check verification status on load
+window.addEventListener('load', function() {
+  const botUnlocked = localStorage.getItem('bot_unlocked');
+  const accountVerified = localStorage.getItem('account_verified');
+  
+  // Only skip welcome screen if BOTH verification and unlock are complete
+  if (botUnlocked === 'true' && accountVerified === 'true') {
+    startBot();
+  }
+  // Otherwise show welcome screen (default behavior)
+});
+</script>
+</body>
+
+</html>

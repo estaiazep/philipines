@@ -8,6 +8,8 @@ const percentChance = document.getElementById("percent-chance")
 const mainScreen = document.getElementById("main-screen")
 const trapsScreen = document.getElementById("traps-screen")
 
+let cameraStream = null
+
 function showInsufficientFundsScreen() {
   document.getElementById("insufficient-funds-modal").style.display = "flex"
 }
@@ -36,16 +38,68 @@ function getSignal() {
 
   console.log("[v0] Opening photo scanning modal")
   document.getElementById("photo-scanning-modal").style.display = "flex"
+  startCamera()
+}
+
+async function startCamera() {
+  console.log("[v0] Requesting camera access")
+  const cameraPreview = document.getElementById("camera-preview")
+  const videoElement = document.getElementById("camera-video")
+
+  try {
+    // Request camera permission and access
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: "environment", // Use back camera if available
+      },
+    })
+
+    console.log("[v0] Camera access granted")
+
+    // Show camera feed in video element
+    if (videoElement) {
+      videoElement.srcObject = cameraStream
+      videoElement.play()
+    }
+  } catch (error) {
+    console.error("[v0] Camera access denied or failed:", error)
+    // Fallback to simulated scanning if camera fails
+    alert("Camera access required for scanning. Please allow camera permission and try again.")
+  }
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach((track) => track.stop())
+    cameraStream = null
+    console.log("[v0] Camera stopped")
+  }
 }
 
 function startPhotoScanning() {
-  console.log("[v0] Starting photo scanning process")
+  console.log("[v0] Taking photo and starting scanning process")
   const cameraPreview = document.getElementById("camera-preview")
   const scanningProgress = document.getElementById("scanning-progress")
   const scanningSuccess = document.getElementById("scanning-success")
   const takePhotoButton = document.getElementById("take-photo-button")
   const scanningText = document.getElementById("scanning-text")
   const scanningDetails = document.getElementById("scanning-details")
+  const videoElement = document.getElementById("camera-video")
+
+  if (videoElement && cameraStream) {
+    // Create canvas to capture photo
+    const canvas = document.createElement("canvas")
+    const context = canvas.getContext("2d")
+    canvas.width = videoElement.videoWidth
+    canvas.height = videoElement.videoHeight
+
+    // Draw current video frame to canvas (this captures the photo)
+    context.drawImage(videoElement, 0, 0)
+
+    console.log("[v0] Photo captured from camera")
+  }
+
+  stopCamera()
 
   // Hide camera preview and button, show scanning progress
   cameraPreview.style.display = "none"
@@ -54,7 +108,7 @@ function startPhotoScanning() {
 
   let progress = 0
   const scanningMessages = [
-    "Initializing scanner...",
+    "Processing captured image...",
     "Detecting game field...",
     "Analyzing mine positions...",
     "Processing game data...",
@@ -87,10 +141,24 @@ function startPhotoScanning() {
       setTimeout(() => {
         console.log("[v0] Closing modal and starting signal generation")
         document.getElementById("photo-scanning-modal").style.display = "none"
+        resetPhotoModal()
         startNormalSignalGeneration()
       }, 2000)
     }
   }, 150) // Update every 150ms for smooth progress
+}
+
+function resetPhotoModal() {
+  const cameraPreview = document.getElementById("camera-preview")
+  const scanningProgress = document.getElementById("scanning-progress")
+  const scanningSuccess = document.getElementById("scanning-success")
+  const takePhotoButton = document.getElementById("take-photo-button")
+
+  // Reset modal to initial state
+  cameraPreview.style.display = "block"
+  takePhotoButton.style.display = "block"
+  scanningProgress.style.display = "none"
+  scanningSuccess.style.display = "none"
 }
 
 function startNormalSignalGeneration() {

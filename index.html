@@ -271,8 +271,9 @@
     </div>
     
     <div class="scanning-body">
-      <!-- Camera Preview Simulation -->
+      <!-- Camera Preview with Real Video -->
       <div id="camera-preview" class="camera-preview">
+        <video id="camera-video" class="camera-video" autoplay playsinline muted></video>
         <div class="camera-overlay">
           <div class="scan-frame">
             <div class="scan-corner top-left"></div>
@@ -282,7 +283,6 @@
           </div>
           <div class="scan-instruction">Position game field within frame</div>
         </div>
-        <div class="camera-bg"></div>
       </div>
       
       <!-- Scanning Progress -->

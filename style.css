@@ -543,18 +543,214 @@ a {
   text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
 }
 
-@keyframes successPulse {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* Photo Scanning Modal Styles */
+.photo-scanning-modal {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #00ffe1;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 255, 225, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.scanning-header {
+  margin-bottom: 25px;
+}
+
+.scanning-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  animation: pulse 2s infinite;
+}
+
+.scanning-title {
+  color: #00ffe1;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 10px rgba(0, 255, 225, 0.5);
+}
+
+.scanning-subtitle {
+  color: #ffffff;
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.scanning-body {
+  margin-bottom: 25px;
+}
+
+.camera-preview {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid #00ffe1;
+}
+
+.camera-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #0a0a0a 25%, #1a1a1a 25%, #1a1a1a 50%, #0a0a0a 50%, #0a0a0a 75%, #1a1a1a 75%);
+  background-size: 20px 20px;
+  animation: cameraStatic 0.1s infinite;
+}
+
+.camera-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.scan-frame {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.scan-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #00ffe1;
+  box-shadow: 0 0 10px rgba(0, 255, 225, 0.8);
+}
+
+.scan-corner.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.scan-corner.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.scan-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.scan-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.scan-instruction {
+  color: #00ffe1;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(0, 255, 225, 0.8);
+}
+
+.scanning-progress {
+  text-align: center;
+}
+
+.scanning-animation {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  background: #1a1a2e;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid #00ffe1;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, #00ffe1 50%, transparent 100%);
+  animation: scanLine 2s infinite;
+}
+
+.scanning-text {
+  color: #00ffe1;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.scanning-details {
+  color: #ffffff;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.scanning-success {
+  text-align: center;
+}
+
+.scanning-success .success-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  animation: successPulse 1s ease-out;
+}
+
+.scanning-success .success-text {
+  color: #00ff88;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.scanning-success .success-details {
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.take-photo-btn {
+  background: linear-gradient(135deg, #00ffe1 0%, #0099cc 100%);
+  color: #000;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 255, 225, 0.4);
+  width: 100%;
+}
+
+.take-photo-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 225, 0.6);
+}
+
+.take-photo-btn:active {
+  transform: translateY(0);
 }
 
 /* Deposit Modal */
@@ -658,18 +854,48 @@ a {
   height: 45px;
   background: linear-gradient(135deg, #ffc107, #ff9800);
   cursor: pointer;
-  box-shadow: 0px 0px 25px rgba(255, 193, 7, 0.6), 0 0 12px rgba(255, 193, 7, 0.3);
+  box-shadow: 0px 0px 40px rgba(255, 193, 7, 0.6), 0 0 20px rgba(255, 193, 7, 0.3);
   border-radius: 12px;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin: 30px 0;
 }
 
-.activate-now-btn:hover {
-  box-shadow: 0px 0px 35px rgba(255, 193, 7, 0.8), 0 0 20px rgba(255, 193, 7, 0.5);
-  transform: translateY(-2px);
+.start-bot-btn:hover {
+  box-shadow: 0px 0px 60px rgba(16, 141, 231, 1), 0 0 30px rgba(16, 141, 231, 0.6);
+  transform: translateY(-3px);
+  background-position: 100% 0;
 }
 
-.activate-now-btn:active {
-  transform: scale(0.95);
+.start-bot-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.start-bot-btn:hover .btn-glow {
+  left: 100%;
+}
+
+.welcome-footer {
+  margin-top: 20px;
+}
+
+.welcome-footer p {
+  font-family: "HalvarBreit", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
 }
 
 /* АДАПТИВНЫЕ СТИЛИ */
@@ -723,6 +949,31 @@ a {
     font-size: 14px;
     width: 160px;
     height: 40px;
+  }
+
+  .scanning-title {
+    font-size: 20px;
+  }
+
+  .scanning-subtitle {
+    font-size: 12px;
+  }
+
+  .logo-icon {
+    font-size: 60px;
+  }
+
+  .feature-item span {
+    font-size: 10px;
+  }
+
+  .stat-number {
+    font-size: 17px;
+  }
+
+  .start-bot-btn {
+    font-size: 15px;
+    height: 55px;
   }
 }
 
@@ -781,9 +1032,45 @@ a {
     width: 200px;
     height: 50px;
   }
+
+  .scanning-title {
+    font-size: 28px;
+  }
+
+  .scanning-subtitle {
+    font-size: 16px;
+  }
+
+  .welcome-content {
+    max-width: 480px;
+  }
+
+  .welcome-title {
+    font-size: 36px;
+  }
+
+  .welcome-subtitle {
+    font-size: 15px;
+  }
+
+  .logo-icon {
+    font-size: 100px;
+  }
+
+  .feature-item span {
+    font-size: 14px;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+
+  .start-bot-btn {
+    font-size: 19px;
+    height: 65px;
+  }
 }
 
-/* Остальные адаптивные стили для основной игры */
 @media screen and (max-width: 250px) {
   .game-button {
     margin-top: 13px;
@@ -1287,61 +1574,59 @@ a {
   transform: scale(0.95);
 }
 
-/* RESPONSIVE WELCOME SCREEN */
-@media screen and (max-width: 350px) {
-  .welcome-title {
-    font-size: 24px;
+/* Animations */
+@keyframes modalSlideIn {
+  0% {
+    transform: translateY(-100%);
   }
-
-  .welcome-subtitle {
-    font-size: 12px;
-  }
-
-  .logo-icon {
-    font-size: 60px;
-  }
-
-  .feature-item span {
-    font-size: 10px;
-  }
-
-  .stat-number {
-    font-size: 17px;
-  }
-
-  .start-bot-btn {
-    font-size: 15px;
-    height: 55px;
+  100% {
+    transform: translateY(0);
   }
 }
 
-@media screen and (min-width: 500px) {
-  .welcome-content {
-    max-width: 480px;
+@keyframes cameraStatic {
+  0% {
+    opacity: 0.8;
   }
-
-  .welcome-title {
-    font-size: 36px;
+  50% {
+    opacity: 0.9;
   }
-
-  .welcome-subtitle {
-    font-size: 15px;
+  100% {
+    opacity: 0.8;
   }
+}
 
-  .logo-icon {
-    font-size: 100px;
+@keyframes scanLine {
+  0% {
+    left: -100%;
   }
-
-  .feature-item span {
-    font-size: 14px;
+  100% {
+    left: 100%;
   }
+}
 
-  .stat-number {
-    font-size: 24px;
+@keyframes successPulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
   }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-  .start-bot-btn {
-    font-size: 19px;
-    height: 65px;
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }

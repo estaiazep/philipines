@@ -192,7 +192,7 @@ function startNormalSignalGeneration() {
   mainScreen.style.display = ""
   trapsScreen.style.display = "none"
 
-  percentChance.textContent = "CHANCE: " + getRandomNumber() + "%"
+  percentChance.textContent = "ACCURACY: " + getRandomNumber() + "%"
   percentChance.style.display = ""
 
   setTimeout(() => {
@@ -247,3 +247,4 @@ if (takePhotoBtn) {
   takePhotoBtn.onclick = startPhotoScanning
   console.log("[v0] Photo scanning button event handler set immediately")
 }
+
